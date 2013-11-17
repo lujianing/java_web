@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="smart_jsp:war">
+    <output-path>$PROJECT_DIR$/smart_jsp/target</output-path>
+    <root id="archive" name="smart_jsp-1.0.war">
+      <element id="artifact" artifact-name="smart_jsp:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/java_web_demo.iml" filepath="$PROJECT_DIR$/java_web_demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jsp_servlet_jdbc/jsp_servlet_jdbc.iml" filepath="$PROJECT_DIR$/jsp_servlet_jdbc/jsp_servlet_jdbc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/smart_html/smart_html.iml" filepath="$PROJECT_DIR$/smart_html/smart_html.iml" />
+      <module fileurl="file://$PROJECT_DIR$/smart_jsp/smart_jsp.iml" filepath="$PROJECT_DIR$/smart_jsp/smart_jsp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring_hibernate/spring_hibernate.iml" filepath="$PROJECT_DIR$/spring_hibernate/spring_hibernate.iml" />
+    </modules>
+  </component>
+</project>
+

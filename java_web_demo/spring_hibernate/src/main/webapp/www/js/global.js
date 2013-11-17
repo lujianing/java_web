@@ -1,0 +1,1 @@
+var BASE = '/spring_hibernate';

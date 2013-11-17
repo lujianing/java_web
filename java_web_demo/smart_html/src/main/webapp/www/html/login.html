@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+
+<h3>Login</h3>
+
+<form id="login_form" method="post">
+    <table>
+        <tr>
+            <td><label for="username">Username:</label></td>
+            <td><input type="text" id="username" name="username"/></td>
+        </tr>
+        <tr>
+            <td><label for="password">Password:</label></td>
+            <td><input type="password" id="password" name="password"/></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="submit">Login</button>
+            </td>
+        </tr>
+    </table>
+</form>
+
+<p id="msg"></p>
+
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery.form.min.js"></script>
+<script type="text/javascript" src="../js/global.js"></script>
+<script type="text/javascript">
+    $(function() {
+        // 登录
+        $('#login_form').ajaxForm({
+            type: 'post',
+            url: BASE + '/login',
+            beforeSubmit: function() {
+                $('#login_form').find(':input').prop('disabled', true);
+            },
+            success: function(result) {
+                if (result.success) {
+                    location.href = BASE + '/www/html/welcome.html';
+                } else {
+                    $('#msg').text('Login failure!');
+                    $('#login_form').find(':input').prop('disabled', false);
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

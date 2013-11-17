@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+</head>
+<body>
+
+<h3>Welcome</h3>
+<p>
+    <a href="#" id="logout">Logout</a>
+</p>
+
+<h4>Task List</h4>
+<div id="task"></div>
+<p>
+    <a href="#" id="create_task">Create Task</a>
+</p>
+
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery.form.min.js"></script>
+<script type="text/javascript" src="../js/global.js"></script>
+<script type="text/javascript">
+    $(function() {
+        // 注销
+        $('#logout').click(function() {
+            $.ajax({
+                type: 'get',
+                url: BASE + '/logout',
+                success: function(result) {
+                    if (result.success) {
+                        location.href = BASE + '/';
+                    }
+                }
+            });
+        });
+
+        // 加载 Task
+        var load = function() {
+            $.ajax({
+                type: 'get',
+                url: BASE + '/task',
+                success: function(result) {
+                    if (result.success) {
+                        var html = '';
+                        html += '<table>';
+                        var taskList = result.data;
+                        $.each(taskList, function(i, task) {
+                            html += '    <tr>';
+                            html += '        <td>' + (i + 1) + '</td>';
+                            html += '        <td>';
+                            html += '            <input type="text" value="' + task.todo + '" class="ext-todo" style="width: 500px;"/>';
+                            html += '        </td>';
+                            html += '        <td class="ext-action">';
+                            html += '            <a href="#" class="ext-update_task" data-id="' + task.id + '">Update</a>';
+                            html += '            <a href="#" class="ext-delete_task" data-id="' + task.id + '">Delete</a>';
+                            html += '        </td>';
+                            html += '    </tr>';
+                        });
+                        html += '</table>';
+                        $('#task').html(html);
+                        $('.ext-action').hide();
+                    } else {
+                        $('#task').html('<p>No Task</p>');
+                    }
+                }
+            });
+        };
+        load();
+
+        // 显示或隐藏操作按钮
+        $(document)
+            .on('focus', '.ext-todo', function() {
+                $('.ext-action').stop().hide();
+                $(this).closest('tr').find('.ext-action').show();
+            }).on('blur', '.ext-todo', function() {
+                $(this).closest('tr').find('.ext-action').fadeOut();
+            });
+
+        // 创建 Task
+        $('#create_task').click(function() {
+            $.ajax({
+                type: 'post',
+                url: BASE + '/task',
+                success: function(result) {
+                    if (result.success) {
+                        load();
+                    }
+                }
+            });
+            return false;
+        });
+
+        // 更新 Task
+        $(document).on('click', '.ext-update_task', function() {
+            var id = $(this).data('id');
+            var todo = $(this).closest('tr').find('input.ext-todo').val();
+            $.ajax({
+                type: 'put',
+                url: BASE + '/task',
+                data: {
+                    'id': id,
+                    'todo': todo
+                },
+                success: function(result) {
+                    if (result.success) {
+                        load();
+                    }
+                }
+            });
+            return false;
+        });
+
+        // 删除 Task
+        $(document).on('click', '.ext-delete_task', function() {
+            var id = $(this).data('id');
+            $.ajax({
+                type: 'delete',
+                url: BASE + '/task',
+                data: {
+                    'id': id
+                },
+                success: function(result) {
+                    if (result.success) {
+                        load();
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+
+</body>
+</html>

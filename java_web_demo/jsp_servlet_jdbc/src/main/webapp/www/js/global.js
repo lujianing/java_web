@@ -1,0 +1,1 @@
+var BASE = '/jsp_servlet_jdbc';

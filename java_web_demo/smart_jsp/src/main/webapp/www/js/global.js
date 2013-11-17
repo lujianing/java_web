@@ -1,0 +1,1 @@
+var BASE = '/smart_jsp';
